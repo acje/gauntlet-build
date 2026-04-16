@@ -1,9 +1,1 @@
-[[main]]
-  name = "Home"
-  pageRef = "/"
-  weight = 10
-
-[[main]]
-  name = "Projects"
-  pageRef = "/projects"
-  weight = 20
+# No main menu items — navigation handled via homepage cards

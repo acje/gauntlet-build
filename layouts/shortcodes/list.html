@@ -1,0 +1,56 @@
+{{/* Override of themes/blowfish/layouts/shortcodes/list.html
+     Changes:
+     - adds orderByWeight=true to sort by front matter weight before limiting
+     - excludes the current page before applying limit
+     - on the homepage, cardView eagerly loads only the first two card images for LCP
+     Blowfish version: v2.x (as of 2026-04) */}}
+{{ $limit := .Get "limit" | default 1 }}
+{{ $title := .Get "title" }}
+{{ $parent := .Page.RelPermalink }}
+{{ $cardView := .Get "cardView" }}
+{{ $where := .Get "where" }}
+{{ $value := .Get "value" }}
+{{ $orderByWeight := .Get "orderByWeight" }}
+{{ with $title }}<h2 class="mt-20 text-2xl font-extrabold mb-10">{{ . }}</h2>{{ end }}
+
+{{ if $cardView | default false }}
+  <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3"{{ if and .Page.IsHome $where (eq $where "Section") (eq $value "projects") }} data-project-grid="homepage"{{ end }}>
+    {{ if $where }}
+      {{ $pages := where .Site.RegularPages $where $value }}
+      {{ if $orderByWeight }}{{ $pages = $pages.ByWeight }}{{ end }}
+      {{ $pages = where $pages "RelPermalink" "ne" $parent }}
+      {{ range $index, $page := ( $pages | first $limit ) }}
+        {{ $imageLoading := "lazy" }}
+        {{ if and $.Page.IsHome (lt $index 2) }}{{ $imageLoading = "eager" }}{{ end }}
+        {{ partial "article-link/card.html" (dict "context" $page "imageLoading" $imageLoading) }}
+      {{ end }}
+    {{ else }}
+      {{ $pages := .Site.RegularPages }}
+      {{ if $orderByWeight }}{{ $pages = $pages.ByWeight }}{{ end }}
+      {{ $pages = where $pages "RelPermalink" "ne" $parent }}
+      {{ range $index, $page := ($pages | first $limit) }}
+        {{ $imageLoading := "lazy" }}
+        {{ if and $.Page.IsHome (lt $index 2) }}{{ $imageLoading = "eager" }}{{ end }}
+        {{ partial "article-link/card.html" (dict "context" $page "imageLoading" $imageLoading) }}
+      {{ end }}
+    {{ end }}
+  </section>
+{{ else }}
+  <section class="space-y-10 w-full mt-10 mb-10">
+    {{ if $where }}
+      {{ $pages := where .Site.RegularPages $where $value }}
+      {{ if $orderByWeight }}{{ $pages = $pages.ByWeight }}{{ end }}
+      {{ $pages = where $pages "RelPermalink" "ne" $parent }}
+      {{ range ($pages | first $limit) }}
+        {{ partial "article-link/simple.html" . }}
+      {{ end }}
+    {{ else }}
+      {{ $pages := .Site.RegularPages }}
+      {{ if $orderByWeight }}{{ $pages = $pages.ByWeight }}{{ end }}
+      {{ $pages = where $pages "RelPermalink" "ne" $parent }}
+      {{ range ($pages | first $limit) }}
+        {{ partial "article-link/simple.html" . }}
+      {{ end }}
+    {{ end }}
+  </section>
+{{ end }}

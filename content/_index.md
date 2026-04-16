@@ -1,8 +1,9 @@
 ---
 title: "gauntlet.build"
-description: "Building resilient distributed systems"
+description: "Open-source libraries for agent-first distributed systems"
+featureimage: "img/PSR-B1509-58.jpg"
 ---
 
-Open-source projects for event-driven architectures, actor models, and distributed data layers.
+Don't burn tokens on undifferentiated heavy lifting
 
-Explore the [Projects](/projects/) to learn more.
+{{< list cardView=true limit=3 where="Section" value="projects" orderByWeight=true >}}

@@ -1,14 +1,16 @@
 colorScheme = "blowfish"
 defaultAppearance = "dark"
 autoSwitchAppearance = true
+description = "Open-source libraries for agent-first distributed systems"
 
 enableSearch = true
 enableCodeCopy = true
 
 [homepage]
-  layout = "profile"
-  homepageImage = ""
+  layout = "background"
+  homepageImage = "img/PSR-B1509-58.jpg"
   showRecent = false
+  layoutBackgroundBlur = false
 
 [article]
   showDate = true
@@ -17,8 +19,14 @@ enableCodeCopy = true
   showBreadcrumbs = true
   showTableOfContents = true
   showRelatedContent = false
+  showReadingTime = false
   showWordCount = false
 
 [list]
   showBreadcrumbs = true
   showTableOfContents = false
+  cardView = true
+
+[footer]
+  showCopyright = false
+  showThemeAttribution = false

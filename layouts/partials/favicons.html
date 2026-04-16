@@ -1,0 +1,22 @@
+{{/* Self-managed favicon stack.
+     - Assets live in /static
+     - Manifest is generated from site config to keep branding in sync
+     - Update theme/background colors here if favicon styling changes */}}
+{{ $manifestData := dict
+  "name" site.Title
+  "short_name" site.Title
+  "theme_color" "#0a0a0f"
+  "background_color" "#0a0a0f"
+  "display" "standalone"
+  "icons" (slice
+    (dict "src" "android-chrome-192x192.png" "sizes" "192x192" "type" "image/png")
+    (dict "src" "android-chrome-512x512.png" "sizes" "512x512" "type" "image/png"))
+}}
+{{ with site.Params.description }}{{ $manifestData = merge $manifestData (dict "description" .) }}{{ end }}
+{{ $manifest := resources.FromString "manifest.webmanifest" ($manifestData | jsonify) }}
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+<link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
+<link rel="manifest" href="{{ $manifest.RelPermalink }}">

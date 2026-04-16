@@ -1,0 +1,358 @@
+/* gauntlet.build — Custom Theming
+   PSR B1509-58 background + project card themes
+   Selectors use :has() because the <a> is a child inside .article-link--card,
+   not a parent wrapping it (Blowfish card.html partial structure). */
+
+/* ===== Background & Atmosphere ===== */
+
+/* Dark overlay + nebula background on homepage */
+.dark body {
+  background-color: #0a0a0f;
+}
+
+/* Background image applied via homepage layout - enhance with vignette */
+main {
+  position: relative;
+}
+
+/* Remove the secondary homepage wash in light mode,
+   but preserve the upstream dark-mode darkening without hiding the image. */
+.homepage-background-overlay-secondary {
+  opacity: 0;
+}
+
+.dark .homepage-background-overlay-secondary {
+  opacity: 0.6;
+}
+
+/* Force 2-col grid on homepage project cards (prevents 3-col orphan gap at md) */
+section.grid[data-project-grid="homepage"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Mobile: single column */
+@media (max-width: 639px) {
+  section.grid[data-project-grid="homepage"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  /* Reset span on mobile */
+  .article-link--card[style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+}
+
+/* ===== Card Base Styles ===== */
+
+.article-link--card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.dark .article-link--card {
+  background: rgba(15, 15, 25, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.article-link--card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Quicksilver — Metallic Silver ===== */
+
+.article-link--card:has(a[href*="/projects/quicksilver"]) {
+  border-color: rgba(192, 197, 206, 0.2);
+}
+
+.dark .article-link--card:has(a[href*="/projects/quicksilver"]) {
+  background: linear-gradient(135deg, rgba(25, 27, 35, 0.9), rgba(40, 44, 55, 0.9));
+  border-color: rgba(192, 197, 206, 0.15);
+  box-shadow: 0 0 20px rgba(192, 197, 206, 0.05);
+}
+
+.dark .article-link--card:has(a[href*="/projects/quicksilver"]):hover {
+  border-color: rgba(192, 197, 206, 0.3);
+  box-shadow: 0 0 30px rgba(192, 197, 206, 0.08);
+}
+
+/* Quicksilver shimmer animation */
+@media (prefers-reduced-motion: no-preference) {
+  .dark .article-link--card:has(a[href*="/projects/quicksilver"])::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(200, 205, 215, 0.04) 45%,
+      rgba(200, 205, 215, 0.08) 50%,
+      rgba(200, 205, 215, 0.04) 55%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 300s ease-in-out infinite;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 200% 0; }
+  50% { background-position: -200% 0; }
+}
+
+/* ===== Pardosa — Dark Earthy Tones + Silk Draglines ===== */
+
+.article-link--card:has(a[href*="/projects/pardosa"]) {
+  border-color: rgba(139, 119, 101, 0.2);
+}
+
+.dark .article-link--card:has(a[href*="/projects/pardosa"]) {
+  background: linear-gradient(135deg, rgba(30, 25, 20, 0.9), rgba(45, 38, 32, 0.9));
+  border-color: rgba(139, 119, 101, 0.15);
+  box-shadow: 0 0 20px rgba(139, 119, 101, 0.05);
+}
+
+.dark .article-link--card:has(a[href*="/projects/pardosa"]):hover {
+  border-color: rgba(139, 119, 101, 0.3);
+  box-shadow: 0 0 30px rgba(139, 119, 101, 0.08);
+}
+
+.article-link--card:has(a[href*="/projects/pardosa"]) {
+  isolation: isolate;
+}
+
+.article-link--card:has(a[href*="/projects/pardosa"]) .p-4,
+.article-link--card:has(a[href*="/projects/pardosa"]) .thumbnail_card,
+.article-link--card:has(a[href*="/projects/pardosa"]) > span {
+  position: relative;
+  z-index: 2;
+}
+
+/* Pardosa silk draglines */
+@media (prefers-reduced-motion: no-preference) {
+  .dark .article-link--card:has(a[href*="/projects/pardosa"])::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(28deg, transparent 46%, rgba(200, 192, 180, 0.055) 48.5%, rgba(200, 192, 180, 0.09) 49.2%, rgba(200, 192, 180, 0.04) 50%, transparent 52%),
+      linear-gradient(41deg, transparent 34%, rgba(185, 176, 164, 0.035) 36.5%, rgba(185, 176, 164, 0.07) 37.2%, rgba(185, 176, 164, 0.03) 38%, transparent 40%),
+      linear-gradient(63deg, transparent 58%, rgba(195, 185, 170, 0.025) 60%, rgba(195, 185, 170, 0.055) 60.8%, transparent 62.5%);
+    background-size: 150% 150%, 130% 130%, 170% 170%;
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.78;
+    animation: dragline-drift 50s ease-in-out infinite;
+  }
+
+  .dark .article-link--card:has(a[href*="/projects/pardosa"])::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 18% 26%, rgba(220, 214, 202, 0.12) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 62% 46%, rgba(210, 202, 188, 0.08) 0 1px, transparent 1.8px),
+      linear-gradient(122deg, transparent 18%, rgba(215, 208, 194, 0.022) 20%, rgba(215, 208, 194, 0.07) 20.7%, transparent 22.4%),
+      linear-gradient(98deg, transparent 72%, rgba(210, 201, 188, 0.018) 74%, rgba(210, 201, 188, 0.055) 74.6%, transparent 76.2%),
+      linear-gradient(14deg, transparent 66%, rgba(215, 206, 192, 0.02) 68%, rgba(215, 206, 192, 0.05) 68.7%, transparent 70.4%);
+    background-size: auto, auto, 160% 160%, 180% 180%, 140% 140%;
+    background-position: 0 0, 0 0, 100% 50%, 20% 100%, 0% 0%;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+    opacity: 0.55;
+    animation: dragline-shimmer 65s linear infinite;
+  }
+}
+
+@keyframes dragline-drift {
+  0% {
+    opacity: 0.58;
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.92;
+    background-position: 100% 18%, 0% 100%, 62% 0%;
+    transform: translate3d(1.5%, -1%, 0) scale(1.02);
+  }
+  100% {
+    opacity: 0.58;
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dragline-shimmer {
+  0% {
+    opacity: 0.35;
+    background-position: 0 0, 0 0, 100% 50%, 20% 100%, 0% 0%;
+  }
+  50% {
+    opacity: 0.7;
+    background-position: 0 0, 0 0, 12% 12%, 84% 18%, 100% 100%;
+  }
+  100% {
+    opacity: 0.35;
+    background-position: 0 0, 0 0, 100% 50%, 20% 100%, 0% 0%;
+  }
+}
+
+/* ===== Gauntlet — Nebula Gradient + Asymmetric Fractal Arbor ===== */
+/* Depends on the Blowfish card container remaining position: relative and the
+   content wrapper/badges staying above pseudo-elements via z-index. Review with
+   layouts/partials/article-link/card.html on theme updates. */
+
+.article-link--card:has(a[href*="/projects/gauntlet"]) {
+  border-color: rgba(130, 80, 170, 0.2);
+  isolation: isolate;
+}
+
+.dark .article-link--card:has(a[href*="/projects/gauntlet"]) {
+  background: linear-gradient(135deg, rgba(30, 20, 40, 0.9), rgba(45, 30, 25, 0.9));
+  border-color: rgba(130, 80, 170, 0.12);
+  box-shadow: 0 0 25px rgba(130, 80, 170, 0.06), 0 0 50px rgba(200, 160, 80, 0.03);
+}
+
+.dark .article-link--card:has(a[href*="/projects/gauntlet"]):hover {
+  border-color: rgba(130, 80, 170, 0.25);
+  box-shadow: 0 0 35px rgba(130, 80, 170, 0.1), 0 0 60px rgba(200, 160, 80, 0.05);
+}
+
+.article-link--card:has(a[href*="/projects/gauntlet"]) .p-4,
+.article-link--card:has(a[href*="/projects/gauntlet"]) .thumbnail_card,
+.article-link--card:has(a[href*="/projects/gauntlet"]) > span {
+  position: relative;
+  z-index: 2;
+}
+
+/* Gauntlet branching fractal */
+@media (prefers-reduced-motion: no-preference) {
+  .dark .article-link--card:has(a[href*="/projects/gauntlet"])::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 44.8%, rgba(196, 155, 228, 0.03) 47.4%, rgba(196, 155, 228, 0.155) 50%, rgba(242, 184, 102, 0.085) 51.6%, transparent 55.6%) 49% 100% / 18% 86% no-repeat,
+      linear-gradient(22deg, transparent 45.2%, rgba(198, 155, 230, 0.026) 47.9%, rgba(198, 155, 230, 0.126) 50%, transparent 52.6%) 45% 72% / 48% 38% no-repeat,
+      linear-gradient(156deg, transparent 45.2%, rgba(244, 185, 102, 0.024) 47.9%, rgba(244, 185, 102, 0.122) 50%, transparent 52.6%) 58% 63% / 46% 38% no-repeat,
+      linear-gradient(10deg, transparent 45.4%, rgba(188, 145, 219, 0.02) 48.2%, rgba(188, 145, 219, 0.098) 50%, transparent 52.4%) 41% 56% / 34% 26% no-repeat,
+      linear-gradient(170deg, transparent 45.4%, rgba(244, 182, 97, 0.02) 48.2%, rgba(244, 182, 97, 0.09) 50%, transparent 52.4%) 61% 51% / 35% 26% no-repeat,
+      linear-gradient(340deg, transparent 45.5%, rgba(181, 138, 212, 0.018) 48.2%, rgba(181, 138, 212, 0.076) 50%, transparent 52.2%) 34% 61% / 25% 18% no-repeat,
+      linear-gradient(132deg, transparent 45.5%, rgba(237, 174, 88, 0.016) 48.3%, rgba(237, 174, 88, 0.064) 50%, transparent 52.2%) 67% 45% / 24% 18% no-repeat,
+      linear-gradient(354deg, transparent 45.6%, rgba(189, 146, 221, 0.015) 48.3%, rgba(189, 146, 221, 0.058) 50%, transparent 52.1%) 50% 26% / 14% 24% no-repeat,
+      linear-gradient(198deg, transparent 45.6%, rgba(243, 182, 98, 0.015) 48.3%, rgba(243, 182, 98, 0.056) 50%, transparent 52.1%) 35% 35% / 24% 18% no-repeat,
+      linear-gradient(18deg, transparent 45.6%, rgba(174, 128, 209, 0.014) 48.3%, rgba(174, 128, 209, 0.052) 50%, transparent 52.1%) 63% 30% / 23% 18% no-repeat,
+      linear-gradient(320deg, transparent 45.7%, rgba(166, 120, 202, 0.012) 48.3%, rgba(166, 120, 202, 0.046) 50%, transparent 52%) 25% 24% / 18% 13% no-repeat,
+      linear-gradient(126deg, transparent 45.7%, rgba(236, 171, 82, 0.011) 48.3%, rgba(236, 171, 82, 0.044) 50%, transparent 52%) 77% 18% / 18% 13% no-repeat,
+      linear-gradient(28deg, transparent 45.7%, rgba(184, 141, 217, 0.011) 48.3%, rgba(184, 141, 217, 0.043) 50%, transparent 52%) 41% 18% / 15% 11% no-repeat,
+      linear-gradient(154deg, transparent 45.7%, rgba(244, 180, 93, 0.01) 48.3%, rgba(244, 180, 93, 0.04) 50%, transparent 52%) 58% 13% / 15% 11% no-repeat,
+      linear-gradient(12deg, transparent 45.8%, rgba(171, 126, 206, 0.01) 48.3%, rgba(171, 126, 206, 0.039) 50%, transparent 52%) 18% 34% / 13% 9% no-repeat,
+      linear-gradient(168deg, transparent 45.8%, rgba(239, 174, 86, 0.01) 48.3%, rgba(239, 174, 86, 0.039) 50%, transparent 52%) 82% 29% / 13% 9% no-repeat;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+    transform-origin: 48% 80%;
+    filter: drop-shadow(0 0 12px rgba(176, 120, 212, 0.12));
+    animation: gauntlet-fractal-sway 64s ease-in-out infinite;
+  }
+
+  .dark .article-link--card:has(a[href*="/projects/gauntlet"])::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 49% 86%, rgba(245, 188, 108, 0.19) 0 1.6px, transparent 2.6px),
+      radial-gradient(circle at 47% 72%, rgba(206, 163, 236, 0.16) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 56% 63%, rgba(244, 187, 101, 0.145) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 41% 56%, rgba(236, 179, 93, 0.125) 0 1.4px, transparent 2.3px),
+      radial-gradient(circle at 62% 50%, rgba(208, 166, 239, 0.135) 0 1.4px, transparent 2.3px),
+      radial-gradient(circle at 35% 36%, rgba(239, 180, 99, 0.115) 0 1.3px, transparent 2.2px),
+      radial-gradient(circle at 69% 31%, rgba(211, 170, 243, 0.12) 0 1.3px, transparent 2.2px),
+      radial-gradient(circle at 50% 21%, rgba(228, 175, 248, 0.105) 0 1.2px, transparent 2px),
+      radial-gradient(circle at 40% 20%, rgba(248, 184, 92, 0.1) 0 1.2px, transparent 2px),
+      radial-gradient(circle at 61% 16%, rgba(219, 172, 247, 0.085) 0 1.1px, transparent 1.9px),
+      radial-gradient(circle at 26% 24%, rgba(248, 183, 88, 0.08) 0 1.1px, transparent 1.9px),
+      radial-gradient(circle at 78% 19%, rgba(212, 168, 244, 0.082) 0 1.1px, transparent 1.9px),
+      radial-gradient(circle at 28% 74%, rgba(164, 116, 206, 0.11) 0, transparent 38%),
+      radial-gradient(circle at 78% 20%, rgba(255, 185, 94, 0.09) 0, transparent 34%),
+      radial-gradient(circle at 50% 54%, rgba(182, 132, 220, 0.07) 0, transparent 42%),
+      radial-gradient(circle at 43% 41%, rgba(250, 192, 111, 0.055) 0, transparent 30%),
+      linear-gradient(122deg, transparent 18%, rgba(214, 162, 244, 0.03) 20%, rgba(214, 162, 244, 0.108) 21%, transparent 23%) 100% 50% / 205% 205% no-repeat,
+      linear-gradient(52deg, transparent 62%, rgba(244, 183, 96, 0.026) 64%, rgba(244, 183, 96, 0.095) 65%, transparent 67%) 12% 100% / 250% 250% no-repeat,
+      linear-gradient(8deg, transparent 44%, rgba(197, 150, 231, 0.022) 46%, rgba(197, 150, 231, 0.06) 47%, transparent 49%) 51% 57% / 180% 180% no-repeat,
+      linear-gradient(164deg, transparent 38%, rgba(248, 187, 100, 0.018) 40%, rgba(248, 187, 100, 0.05) 41%, transparent 43%) 48% 30% / 165% 165% no-repeat;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    opacity: 0.68;
+    transform-origin: 50% 56%;
+    animation: gauntlet-fractal-glimmer 84s linear infinite;
+  }
+}
+
+@keyframes gauntlet-fractal-sway {
+  0% {
+    opacity: 0.62;
+    transform: translate3d(0, 0, 0) scale(1.045);
+  }
+  38% {
+    opacity: 1;
+    transform: translate3d(2.8%, -2%, 0) scale(1.09);
+  }
+  72% {
+    opacity: 0.82;
+    transform: translate3d(-2.2%, 2.2%, 0) scale(1.012);
+  }
+  100% {
+    opacity: 0.62;
+    transform: translate3d(0, 0, 0) scale(1.045);
+  }
+}
+
+@keyframes gauntlet-fractal-glimmer {
+  0% {
+    opacity: 0.4;
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+  50% {
+    opacity: 0.82;
+    transform: translate3d(2%, -1.4%, 0) scale(1.08);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+}
+
+/* ===== Light Mode Adjustments ===== */
+
+.article-link--card:has(a[href*="/projects/quicksilver"]) {
+  background: linear-gradient(135deg, rgba(245, 247, 250, 0.95), rgba(235, 238, 245, 0.95));
+}
+
+.article-link--card:has(a[href*="/projects/pardosa"]) {
+  background: linear-gradient(135deg, rgba(248, 245, 242, 0.95), rgba(240, 235, 228, 0.95));
+}
+
+.article-link--card:has(a[href*="/projects/gauntlet"]) {
+  background: linear-gradient(135deg, rgba(248, 244, 252, 0.95), rgba(252, 248, 242, 0.95));
+}
+
+/* ===== Reduced Motion ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .article-link--card,
+  .article-link--card::before,
+  .article-link--card::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

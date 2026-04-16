@@ -1,0 +1,14 @@
+languageName = "English"
+weight = 1
+title = "gauntlet.build"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+
+[params.author]
+  name = "acje"
+  headline = "Building resilient distributed systems"
+  links = [
+    { github = "https://github.com/acje" },
+  ]

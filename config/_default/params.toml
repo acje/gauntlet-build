@@ -1,0 +1,24 @@
+colorScheme = "blowfish"
+defaultAppearance = "dark"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+
+[homepage]
+  layout = "profile"
+  homepageImage = ""
+  showRecent = false
+
+[article]
+  showDate = true
+  showDateUpdated = false
+  showAuthor = true
+  showBreadcrumbs = true
+  showTableOfContents = true
+  showRelatedContent = false
+  showWordCount = false
+
+[list]
+  showBreadcrumbs = true
+  showTableOfContents = false

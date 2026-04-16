@@ -1,0 +1,15 @@
+baseURL = "https://gauntlet.build/"
+languageCode = "en"
+title = "gauntlet.build"
+theme = "blowfish"
+
+enableRobotsTXT = true
+paginate = 10
+summaryLength = 30
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false

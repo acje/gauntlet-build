@@ -41,6 +41,12 @@ section.grid[data-project-grid="homepage"] {
   }
 }
 
+/* ===== Homepage card titles left-aligned ===== */
+
+.article-link--card .p-4 {
+  text-align: left;
+}
+
 /* ===== Card Base Styles ===== */
 
 .article-link--card {
@@ -95,6 +101,37 @@ section.grid[data-project-grid="homepage"] {
     pointer-events: none;
     z-index: 1;
   }
+
+  .dark .article-link--card:has(a[href*="/projects/quicksilver"])::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 22%, rgba(200, 205, 215, 0.14) 0 5px, transparent 8px),
+      radial-gradient(circle at 72% 18%, rgba(180, 188, 200, 0.12) 0 4.5px, transparent 7.5px),
+      radial-gradient(circle at 85% 42%, rgba(210, 214, 222, 0.13) 0 5.5px, transparent 9px),
+      radial-gradient(circle at 28% 55%, rgba(190, 196, 208, 0.11) 0 4px, transparent 7px),
+      radial-gradient(circle at 55% 35%, rgba(205, 210, 220, 0.10) 0 4.8px, transparent 8px),
+      radial-gradient(circle at 42% 78%, rgba(195, 200, 212, 0.12) 0 5px, transparent 8.5px),
+      radial-gradient(circle at 88% 72%, rgba(185, 192, 205, 0.09) 0 4.2px, transparent 7px),
+      radial-gradient(circle at 10% 82%, rgba(200, 206, 218, 0.10) 0 4.5px, transparent 7.5px),
+      radial-gradient(circle at 65% 65%, rgba(210, 215, 225, 0.08) 0 3.8px, transparent 6.5px),
+      radial-gradient(circle at 35% 12%, rgba(188, 194, 206, 0.09) 0 4px, transparent 6.8px),
+      radial-gradient(circle at 78% 88%, rgba(195, 200, 210, 0.11) 0 4.8px, transparent 8px),
+      radial-gradient(circle at 50% 50%, rgba(205, 210, 220, 0.07) 0 3.5px, transparent 6px);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    animation: quicksilver-dots 80s ease-in-out infinite;
+  }
+}
+
+@keyframes quicksilver-dots {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.85; }
+  100% { opacity: 0.5; }
 }
 
 @keyframes shimmer {
@@ -146,7 +183,7 @@ section.grid[data-project-grid="homepage"] {
     pointer-events: none;
     z-index: 0;
     opacity: 0.78;
-    animation: dragline-drift 50s ease-in-out infinite;
+    animation: dragline-drift 150s ease-in-out infinite;
   }
 
   .dark .article-link--card:has(a[href*="/projects/pardosa"])::after {
@@ -166,7 +203,7 @@ section.grid[data-project-grid="homepage"] {
     z-index: 0;
     mix-blend-mode: screen;
     opacity: 0.55;
-    animation: dragline-shimmer 65s linear infinite;
+    animation: dragline-shimmer 195s linear infinite;
   }
 }
 
@@ -268,6 +305,7 @@ section.grid[data-project-grid="homepage"] {
     position: absolute;
     inset: 0;
     background:
+      /* Junction dots */
       radial-gradient(circle at 49% 86%, rgba(245, 188, 108, 0.19) 0 1.6px, transparent 2.6px),
       radial-gradient(circle at 47% 72%, rgba(206, 163, 236, 0.16) 0 1.5px, transparent 2.5px),
       radial-gradient(circle at 56% 63%, rgba(244, 187, 101, 0.145) 0 1.5px, transparent 2.5px),
@@ -280,6 +318,22 @@ section.grid[data-project-grid="homepage"] {
       radial-gradient(circle at 61% 16%, rgba(219, 172, 247, 0.085) 0 1.1px, transparent 1.9px),
       radial-gradient(circle at 26% 24%, rgba(248, 183, 88, 0.08) 0 1.1px, transparent 1.9px),
       radial-gradient(circle at 78% 19%, rgba(212, 168, 244, 0.082) 0 1.1px, transparent 1.9px),
+      /* Branch-tip dots */
+      radial-gradient(circle at 21% 53%, rgba(198, 155, 230, 0.14) 0 6px, transparent 9.6px),
+      radial-gradient(circle at 81% 44%, rgba(244, 185, 102, 0.13) 0 6px, transparent 9.6px),
+      radial-gradient(circle at 24% 43%, rgba(188, 145, 219, 0.11) 0 5.4px, transparent 9px),
+      radial-gradient(circle at 78% 38%, rgba(244, 182, 97, 0.10) 0 5.4px, transparent 9px),
+      radial-gradient(circle at 22% 52%, rgba(181, 138, 212, 0.09) 0 5.1px, transparent 8.4px),
+      radial-gradient(circle at 79% 36%, rgba(237, 174, 88, 0.085) 0 5.1px, transparent 8.4px),
+      radial-gradient(circle at 43% 14%, rgba(189, 146, 221, 0.08) 0 4.8px, transparent 7.8px),
+      radial-gradient(circle at 23% 26%, rgba(243, 182, 98, 0.08) 0 4.8px, transparent 7.8px),
+      radial-gradient(circle at 74% 21%, rgba(174, 128, 209, 0.075) 0 4.5px, transparent 7.5px),
+      radial-gradient(circle at 16% 18%, rgba(166, 120, 202, 0.07) 0 4.5px, transparent 7.5px),
+      radial-gradient(circle at 86% 12%, rgba(236, 171, 82, 0.07) 0 4.5px, transparent 7.5px),
+      radial-gradient(circle at 34% 13%, rgba(184, 141, 217, 0.065) 0 4.2px, transparent 6.9px),
+      radial-gradient(circle at 66% 8%, rgba(244, 180, 93, 0.065) 0 4.2px, transparent 6.9px),
+      radial-gradient(circle at 12% 30%, rgba(171, 126, 206, 0.06) 0 4.2px, transparent 6.9px),
+      radial-gradient(circle at 88% 25%, rgba(239, 174, 86, 0.06) 0 4.2px, transparent 6.9px),
       radial-gradient(circle at 28% 74%, rgba(164, 116, 206, 0.11) 0, transparent 38%),
       radial-gradient(circle at 78% 20%, rgba(255, 185, 94, 0.09) 0, transparent 34%),
       radial-gradient(circle at 50% 54%, rgba(182, 132, 220, 0.07) 0, transparent 42%),

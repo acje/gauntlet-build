@@ -5,7 +5,7 @@ showDate: false
 weight: 10
 ---
 
-Event-driven data layer on NATS/Jetstream implementing fiber semantics. Ordered event storage with fibers, lines, and migration support.
+Event-driven data layer on NATS/Jetstream implementing ECST with migrations. Ordered event storage with fibers, lines, and migration support.
 
 ## Overview
 

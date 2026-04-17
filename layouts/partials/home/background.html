@@ -1,8 +1,9 @@
 {{/*
   Local override for themes/blowfish/layouts/partials/home/background.html.
   Intent: render the homepage H1 from .Site.Title instead of params.author.name,
-  suppress the homepage author headline and social links, and remove the
-  light-mode white background overlay while preserving dark-mode darkening.
+  suppress the homepage author headline and social links, remove the
+  light-mode white background overlay while preserving dark-mode darkening,
+  and left-align content (text-left on .Content section) instead of upstream's centered layout.
   The secondary overlay remains in markup via
   `homepage-background-overlay-secondary` and is controlled by
   assets/css/custom.css. Review both together against upstream on theme updates.
@@ -75,10 +76,10 @@
                 data-zoom-src="{{ $squareImage.RelPermalink }}">
             {{ end }}
           {{ end }}
-          <h1 class="mb-2 text-4xl font-extrabold text-neutral-800 dark:text-neutral-200">
+          <h1 class="mb-16 text-4xl font-extrabold text-neutral-800 dark:text-neutral-200">
             {{ .Site.Title }}
           </h1>
-          <section class="prose dark:prose-invert w-full">{{ .Content }}</section>
+          <section class="prose dark:prose-invert w-full text-left">{{ .Content }}</section>
         </div>
       </div>
     </div>

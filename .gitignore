@@ -1,3 +1,20 @@
 public/
 resources/
 .hugo_build.lock
+
+# Secrets & credentials
+.env*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+credentials.json
+secrets/
+
+# Infrastructure state
+*.tfstate
+*.tfstate.backup
+
+# Dependencies
+node_modules/

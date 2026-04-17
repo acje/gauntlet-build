@@ -6,7 +6,7 @@ weight: 20
 span: 2
 ---
 
-Security-oriented actor model specification for distributed computing with WASM-sandboxed enclaves, capability-based messaging, and supervision hierarchies.
+Security-oriented actor model specification for distributed computing with WASM-sandboxed enclaves, capability-based messaging, and multiple autonomous supervision hierarchies.
 
 ## Overview
 
